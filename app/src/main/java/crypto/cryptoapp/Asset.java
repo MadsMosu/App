@@ -39,43 +39,43 @@ public class Asset {
         this.price = price;
     }
 
-    public void setID(int id) {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
         this.id = id;
     }
 
-    public int getID() {
-        return this.id;
+    public String getSymbol() {
+        return symbol;
     }
 
-    public void setassetName(String assetName) {
-        this.assetName = assetName;
-    }
-
-    public String getassetName() {
-        return this.assetName;
-    }
-
-    public void setsymbol(String symbol) {
+    public void setSymbol(String symbol) {
         this.symbol = symbol;
     }
 
-    public String getsymbol() {
-        return this.symbol;
+    public String getAssetName() {
+        return assetName;
     }
 
-    public Double getchange() {
-        return this.change;
+    public void setAssetName(String assetName) {
+        this.assetName = assetName;
     }
 
-    public void setchange(Double change) {
-        this.change = change;
-    }
-
-    public Double getprice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setprice(Double price) {
+    public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public Double getChange() {
+        return change;
+    }
+
+    public void setChange(Double change) {
+        this.change = change;
     }
 }

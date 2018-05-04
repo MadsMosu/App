@@ -39,7 +39,7 @@ public class AddAsset extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 for (Asset asset: assets) {
-                    if(asset.getassetName().contains(query)){
+                    if(asset.getAssetName().contains(query)){
                         adapter.getFilter().filter(query);
                         break;
                     }

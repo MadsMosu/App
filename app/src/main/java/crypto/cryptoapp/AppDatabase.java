@@ -9,7 +9,7 @@ import android.content.Context;
  * Created by Mads on 04-05-2018.
  */
 
-@Database(entities = {Asset.class}, version = 1)
+@Database(entities = {Asset.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase INSTANCE;
     public abstract AssetDAO assetDao();
