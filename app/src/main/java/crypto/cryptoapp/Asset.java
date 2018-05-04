@@ -19,6 +19,7 @@ public class Asset {
     @ColumnInfo(name = "price change")
     private Double change;
 
+    @Ignore
     public Asset() {
 
     }
@@ -29,6 +30,7 @@ public class Asset {
         this.assetName = assetName;
     }
 
+    @Ignore
     public Asset(int id, String assetName, String symbol, double change, double price) {
         this.id = id;
         this.assetName = assetName;

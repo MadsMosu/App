@@ -12,11 +12,12 @@ import java.util.List;
 public interface AssetDAO {
 
     @Query("SELECT * FROM asset")
-    List<Asset> getAll();
+    List<Asset> getUserAssets();
 
-    @Insert
-    void insertAll(Asset... assets);
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertUserAsset(Asset asset);
 
     @Delete
-    void dele(Asset asset);
+    void delete(Asset asset);
+
 }
