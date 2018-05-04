@@ -2,6 +2,8 @@ package crypto.cryptoapp;
 
 import android.arch.persistence.room.*;
 
+import java.util.List;
+
 /**
  * Created by Mads on 04-05-2018.
  */

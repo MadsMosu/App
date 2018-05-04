@@ -15,12 +15,13 @@ public class APIcalls {
 
 
     // api request to get a list of all available assets.
-    private void getAssetList(){
+    public void getAssetList(){
         URL_request = "https://min-api.cryptocompare.com/data/all/coinlist";
         loadURL(URL_request);
+
     }
 
-    private void getCurrentPrice(List<String> assetSymbols){
+    public void getCurrentPrice(List<String> assetSymbols){
         StringBuilder sb = new StringBuilder();
         sb.append("https://min-api.cryptocompare.com/data/pricemulti?fsyms=");
         for (String symbol:assetSymbols) {
@@ -34,7 +35,7 @@ public class APIcalls {
         loadURL(URL_request);
     }
 
-    private void getDayPrice(List<String> assetSymbols){
+    public void getDayPrice(List<String> assetSymbols){
         StringBuilder sb = new StringBuilder();
         sb.append("https://min-api.cryptocompare.com/data/pricemultifull?fsyms=");
         for (String symbol:assetSymbols) {
