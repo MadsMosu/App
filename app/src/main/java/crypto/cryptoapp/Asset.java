@@ -23,15 +23,14 @@ public class Asset {
 
     }
 
-    public Asset(int id, String assetName, String symbol, double change, double price) {
+    public Asset(int id, String assetName, String symbol) {
         this.id = id;
-        this.assetName = assetName;
         this.symbol = symbol;
-        this.change = change;
-        this.price = price;
+        this.assetName = assetName;
     }
 
-    public Asset(String assetName, String symbol, double change, double price) {
+    public Asset(int id, String assetName, String symbol, double change, double price) {
+        this.id = id;
         this.assetName = assetName;
         this.symbol = symbol;
         this.change = change;
