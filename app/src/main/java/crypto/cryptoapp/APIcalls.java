@@ -17,6 +17,7 @@ public class APIcalls {
     // api request to get a list of all available assets.
     private void getAssetList(){
         URL_request = "https://min-api.cryptocompare.com/data/all/coinlist";
+        loadURL(URL_request);
     }
 
     private void getCurrentPrice(List<String> assetSymbols){
@@ -29,6 +30,8 @@ public class APIcalls {
             }
         }
         sb.append("&tsyms=USD");
+        URL_request = sb.toString();
+        loadURL(URL_request);
     }
 
     private void getDayPrice(List<String> assetSymbols){
@@ -41,11 +44,13 @@ public class APIcalls {
             }
         }
         sb.append("&tsyms=USD");
+        URL_request = sb.toString();
+        loadURL(URL_request);
     }
 
 
 
-    private void loadURLData(String url) {
+    private void loadURL(String url) {
         JsonObjectRequest DataRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
