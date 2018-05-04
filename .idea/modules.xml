@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/CryptoApp.iml" filepath="$PROJECT_DIR$/CryptoApp.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../../../Mads/Documents/app/app/app.iml" filepath="$PROJECT_DIR$/../../../Mads/Documents/app/app/app.iml" />
+      <module fileurl="file://C:\Users\Mads\Documents\app\CryptoApp.iml" filepath="C:\Users\Mads\Documents\app\CryptoApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app.iml" filepath="$PROJECT_DIR$/app.iml" />
+      <module fileurl="file://C:\Users\Mads\Documents\app\app\app.iml" filepath="C:\Users\Mads\Documents\app\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app-app.iml" filepath="$PROJECT_DIR$/app/app-app.iml" />
     </modules>
   </component>

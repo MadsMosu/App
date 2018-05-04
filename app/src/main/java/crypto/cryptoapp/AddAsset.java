@@ -1,20 +1,54 @@
 package crypto.cryptoapp;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import java.util.ArrayList;
+import android.widget.Toast;
+
 
 /**
  * Created by Mads on 04-05-2018.
  */
 
-public class AddAsset extends AppCompatActivity{
+public class AddAsset extends AppCompatActivity {
+
+    SearchView searchView;
+    ListView listView;
+    ArrayList<String> assets;
+    ArrayAdapter<String> adapter;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_asset);
-    }
 
-    ActivityMainBinding ac
+        searchView = (SearchView) findViewById(R.id.search_coin);
+        listView = (ListView) findViewById(R.id.list_view);
+
+        assets = new ArrayList<>();
+        APIcalls apiCalls = new APIcalls();
+
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, assets);
+        listView.setAdapter(adapter);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                if(assets.contains(query)){
+                    adapter.getFilter().filter(query);
+                } else {
+                    Toast.makeText(AddAsset.this, "No coins found", Toast.LENGTH_LONG).show();
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+    }
 }
