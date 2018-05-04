@@ -6,6 +6,8 @@ import android.support.v7.widget.SearchView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import java.util.ArrayList;
+import java.util.List;
+
 import android.widget.Toast;
 
 
@@ -17,7 +19,7 @@ public class AddAsset extends AppCompatActivity {
 
     SearchView searchView;
     ListView listView;
-    ArrayList<Asset> assets;
+    List<Asset> assets;
     ArrayAdapter<Asset> adapter;
 
     @Override
@@ -28,9 +30,9 @@ public class AddAsset extends AppCompatActivity {
         searchView = (SearchView) findViewById(R.id.search_coin);
         listView = (ListView) findViewById(R.id.list_view);
 
-        assets = new ArrayList<>();
-        APIcalls apiCalls = new APIcalls();
-        apiCalls.getAssetList();
+
+        APIcalls apiCalls = new APIcalls(this);
+        assets = apiCalls.getAssetList();
 
         adapter = new ArrayAdapter<Asset>(this, android.R.layout.simple_list_item_1, assets);
         listView.setAdapter(adapter);

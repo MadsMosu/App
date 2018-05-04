@@ -1,13 +1,13 @@
 package crypto.cryptoapp;
 
 import android.arch.persistence.room.*;
+import android.support.annotation.NonNull;
 
 @Entity
 public class Asset {
-    @PrimaryKey
-    private int id;
 
-    @ColumnInfo(name = "asset symbol")
+    @PrimaryKey
+    @NonNull
     private String symbol;
 
     @ColumnInfo(name = "asset name")
@@ -24,27 +24,18 @@ public class Asset {
 
     }
 
-    public Asset(int id, String assetName, String symbol) {
-        this.id = id;
+    public Asset( String assetName, String symbol) {
         this.symbol = symbol;
         this.assetName = assetName;
     }
 
     @Ignore
-    public Asset(int id, String assetName, String symbol, double change, double price) {
-        this.id = id;
+    public Asset(String assetName, String symbol, double change, double price) {
+
         this.assetName = assetName;
         this.symbol = symbol;
         this.change = change;
         this.price = price;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getSymbol() {
