@@ -8,4 +8,24 @@
     tools:context=".MainActivity"
     tools:showIn="@layout/activity_main">
 
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:backgroundTint="@color/colorPrimaryDark"
+        app:rippleColor="@android:color/background_dark"
+        app:srcCompat="@drawable/ic_add_black_24dp"
+        tools:layout_editor_absoluteX="316dp"
+        tools:layout_editor_absoluteY="440dp" />
+
+    <android.support.v7.widget.recyclerView
+        android:id="@+id/assetView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottom0f="parent"
+        app:layout_constraintLeft_toLeft0f="parent"
+        app:layout_constraintRight_toRight0f="parent"
+        app:layout_constraintTop_toTop0f="parent"/>
 </android.support.constraint.ConstraintLayout>
