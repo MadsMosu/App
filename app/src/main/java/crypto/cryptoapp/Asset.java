@@ -24,7 +24,7 @@ public class Asset {
 
     }
 
-    public Asset( String assetName, String symbol) {
+    public Asset(String symbol, String assetName) {
         this.symbol = symbol;
         this.assetName = assetName;
     }
@@ -68,5 +68,11 @@ public class Asset {
 
     public void setChange(Double change) {
         this.change = change;
+    }
+
+
+    @Override
+    public String toString() {
+        return getAssetName() + " (" + getSymbol() + ")" ;
     }
 }

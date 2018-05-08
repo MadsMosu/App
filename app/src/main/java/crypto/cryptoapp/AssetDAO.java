@@ -1,5 +1,6 @@
 package crypto.cryptoapp;
 
+import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.*;
 
 import java.util.List;
@@ -15,7 +16,7 @@ public interface AssetDAO {
     List<Asset> getUserAssets();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertUserAsset(Asset asset);
+    void addUserAsset(Asset asset);
 
     @Delete
     void delete(Asset asset);

@@ -69,7 +69,6 @@ public class APIcalls {
                     public void onResponse(JSONObject response) {
 
                         try {
-                            Log.d("allCoins", response.getJSONObject("Data").toString());
                             JSONObject data = response.getJSONObject("Data");
 
                             JSONArray array = data.names(); // contains all the keys inside Data
@@ -77,9 +76,10 @@ public class APIcalls {
 
 
                             for (int i = 0; i < array.length(); i++ ) {
-                                String key = array.getString(i); // 42 or 365 for your example code
-                                JSONObject obj = data.getJSONObject(key); //  contains the JSONObject of the key 42 or 365
-                                assetList.add(new Asset(obj.getString("Symbol"), obj.getString("FullName")));
+                                String key = array.getString(i);
+                                JSONObject obj = data.getJSONObject(key);
+                                assetList.add(new Asset(obj.getString("Symbol"), obj.getString
+                                        ("CoinName")));
                             }
 
 
@@ -91,12 +91,13 @@ public class APIcalls {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(context, "No coins found", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "xDD" + error.getMessage(), Toast.LENGTH_LONG).show();
             }
 
         });
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(DataRequest);
+
         return assetList;
     }
 
