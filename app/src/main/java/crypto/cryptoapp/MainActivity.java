@@ -9,6 +9,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -50,7 +51,51 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
+        swipeRefreshLayout.setOnRefreshListener(
+                new SwipeRefreshLayout.OnRefreshListener() {
+
+                    @Override
+                    public void onRefresh(){
+                        handler.post(refreshing);
+                    }
+                });
+
+        listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                boolean enable = false;
+
+                if(listView != null && listView.getChildCount() > 0){
+                    boolean firstItemVisible = listView.getFirstVisiblePosition() == 0;
+                    boolean topOfFirstItemVisible = listView.getChildAt(0).getTop() == 0;
+                    enable = firstItemVisible && topOfFirstItemVisible;
+                }
+                swipeRefreshLayout.setEnabled(enable);
+            }
+        });
     }
+
+    private final Runnable refreshing = new Runnable(){
+        @Override
+        public void run() {
+            try {
+                if(swipeRefreshLayout.isRefreshing()){
+                    //fetch new data here
+                } else {
+                    swipeRefreshLayout.setRefreshing(false);
+                    //update list here
+                }
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+        }
+    };
 
 
 
