@@ -30,12 +30,11 @@ public class Asset {
     }
 
     @Ignore
-    public Asset(String assetName, String symbol, double change, double price) {
+    public Asset(String symbol, String price, String change) {
 
-        this.assetName = assetName;
         this.symbol = symbol;
-        this.change = change;
-        this.price = price;
+        this.change = Double.parseDouble(change);
+        this.price = Double.parseDouble(price);
     }
 
     public String getSymbol() {

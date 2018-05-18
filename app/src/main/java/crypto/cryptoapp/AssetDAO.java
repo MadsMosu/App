@@ -18,6 +18,9 @@ public interface AssetDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void addUserAsset(Asset asset);
 
+    @Update
+    void updateUserAsset(Asset... assets);
+
     @Delete
     void delete(Asset asset);
 

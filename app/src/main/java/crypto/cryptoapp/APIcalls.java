@@ -3,6 +3,7 @@ package crypto.cryptoapp;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -27,25 +28,11 @@ public class APIcalls {
     // api request to get a list of all available assets.
     public List getAssetList(){
         URL_request = "https://min-api.cryptocompare.com/data/all/coinlist";
-        return loadURL(URL_request);
+        return loadURL(URL_request, "fullList");
 
     }
 
-    public void getCurrentPrice(List<String> assetSymbols){
-        StringBuilder sb = new StringBuilder();
-        sb.append("https://min-api.cryptocompare.com/data/pricemulti?fsyms=");
-        for (String symbol:assetSymbols) {
-            sb.append(symbol);
-            if(!symbol.equals(assetSymbols.get(assetSymbols.size()-1))){
-                sb.append(",");
-            }
-        }
-        sb.append("&tsyms=USD");
-        URL_request = sb.toString();
-        loadURL(URL_request);
-    }
-
-    public void getDayPrice(List<String> assetSymbols){
+    public List getCurrentPrice(List<String> assetSymbols){
         StringBuilder sb = new StringBuilder();
         sb.append("https://min-api.cryptocompare.com/data/pricemultifull?fsyms=");
         for (String symbol:assetSymbols) {
@@ -56,33 +43,45 @@ public class APIcalls {
         }
         sb.append("&tsyms=USD");
         URL_request = sb.toString();
-        loadURL(URL_request);
+        return loadURL(URL_request, "currentPrice");
     }
 
 
 
-    private List<Asset> loadURL(String url) {
+    private List<Asset> loadURL(String url, final String func) {
         assetList = new ArrayList<>();
-        JsonObjectRequest DataRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+        final JsonObjectRequest DataRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-
+                        JSONObject data;
+                        JSONArray array;
                         try {
-                            JSONObject data = response.getJSONObject("Data");
 
-                            JSONArray array = data.names(); // contains all the keys inside Data
+                        switch(func) {
+                                case "fullList":
+                                    data = response.getJSONObject("Data");
+                                    array = data.names(); // contains all the keys inside Data
 
+                                    for (int i = 0; i < array.length(); i++) {
+                                        String key = array.getString(i);
+                                        JSONObject obj = data.getJSONObject(key);
+                                        assetList.add(new Asset(obj.getString("Symbol"), obj.getString
+                                                ("CoinName")));
+                                    }
+                                case "dayPrice":
+                                    data = response.getJSONObject("RAW");
+                                    array = data.names(); // contains all the keys inside Data
 
+                                    for (int i = 0; i < array.length(); i++) {
+                                        String key = array.getString(i);
+                                        JSONObject obj = data.getJSONObject(key);
+                                        assetList.add(new Asset(obj.getString("FROMSYMBOL"), obj
+                                                .getString("PRICE"), obj.getString
+                                                ("CHANGEPCT24HOUR")));
+                                }
 
-                            for (int i = 0; i < array.length(); i++ ) {
-                                String key = array.getString(i);
-                                JSONObject obj = data.getJSONObject(key);
-                                assetList.add(new Asset(obj.getString("Symbol"), obj.getString
-                                        ("CoinName")));
                             }
-
-
                         }catch (JSONException e) {
                                 e.printStackTrace();}
 
