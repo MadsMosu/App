@@ -30,12 +30,12 @@ public class MainActivity extends AppCompatActivity {
         dbHandler = new DBHandler(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        listView = (ListView) findViewById(R.id.users_asset_list);
+        //listView = (ListView) findViewById(R.id.users_asset_list);
 
 
         assets = dbHandler.getUserAssets();
         adapter = new ArrayAdapter<Asset>(this, android.R.layout.simple_list_item_1, assets);
-        listView.setAdapter(adapter);
+        //listView.setAdapter(adapter);
 
 
         fab = findViewById(R.id.fab);

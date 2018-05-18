@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="100">
+
+    <TextView
+        android:gravity="center"
+        android:textAlignment="center"
+        android:text="Coin name"
+        android:id="@+id/name"
+        android:layout_weight="50"
+        android:layout_width="match_parent"
+        android:layout_height="60dp" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_weight="50"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:gravity="center"
+            android:text="Price"
+            android:id="@+id/price"
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
+
+        <TextView
+            android:gravity="center"
+            android:text="change"
+            android:id="@+id/change"
+            android:layout_below="@+id/price"
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
+
+    </LinearLayout>
+
+</LinearLayout>
