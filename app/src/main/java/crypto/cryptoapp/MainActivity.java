@@ -31,14 +31,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        apiCalls = new APIcalls(this);
-
         dbHandler = new DBHandler(this);
+        apiCalls = new APIcalls(this, dbHandler);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         updateAssets = apiCalls.getCurrentPrice(dbHandler.getUserAssetString());
-        dbHandler.updateUserAsset(updateAssets);
 
 
         listView = (ListView) findViewById(R.id.coinListView);

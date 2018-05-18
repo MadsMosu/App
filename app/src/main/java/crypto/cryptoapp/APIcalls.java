@@ -19,10 +19,11 @@ public class APIcalls {
     private String URL_request;
     private List<Asset> assetList, fullAssetList;
     private Context context;
+    private DBHandler dbhandler;
 
-
-    public APIcalls(Context context) {
+    public APIcalls(Context context, DBHandler dbhandler) {
         this.context = context;
+        this.dbhandler = dbhandler;
     }
 
     // api request to get a list of all available assets.
@@ -108,12 +109,13 @@ public class APIcalls {
 
                                     String key1 = theArray.getString(j);
                                     JSONObject obj1 = obj.getJSONObject(key1);
-                                    assetList.add(new Asset(obj1.getString("FROMSYMBOL"), obj1
+                                    dbhandler.updateUserAsset(new Asset(obj1.getString("FROMSYMBOL"), obj1
                                             .getString("PRICE"), obj1.getString
                                             ("CHANGEPCT24HOUR")));
 
-                                }}
 
+
+                                }}
                         }
                         catch (JSONException e) {
 
@@ -128,7 +130,6 @@ public class APIcalls {
         });
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(DataRequest);
-
         return assetList;
     }
 

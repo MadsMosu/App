@@ -40,7 +40,7 @@ public class AddAsset extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.list_view);
 
 
-        apiCalls = new APIcalls(this);
+        apiCalls = new APIcalls(this, dbHandler);
         assets = apiCalls.getAssetList();
 
         adapter = new ArrayAdapter<Asset>(this, android.R.layout.simple_list_item_1, assets);

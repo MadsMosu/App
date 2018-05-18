@@ -36,8 +36,9 @@ public class DBHandler {
         assetDao.addUserAsset(asset);
     }
 
-    public void updateUserAsset (List<Asset> assets) {
-        assetDao.updateUserAsset(assets.toArray(new Asset[assets.size()]));
+    public void updateUserAsset (Asset asset) {
+       // assetDao.updateUserAsset(assets.toArray(new Asset[assets.size()]));
+        assetDao.updateUserAsset(asset);
     }
 
 
