@@ -15,27 +15,29 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     FloatingActionButton fab;
-    List<Asset> assets;
+    List<Asset> assets, updateAssets;
     DBHandler dbHandler;
     ListView listView;
     ArrayAdapter<Asset> adapter;
-
+    APIcalls apiCalls;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        apiCalls = new APIcalls(this);
         dbHandler = new DBHandler(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        updateAssets = apiCalls.getCurrentPrice(dbHandler.getUserAssetString());
+        dbHandler.updateUserAsset(updateAssets);
         //listView = (ListView) findViewById(R.id.users_asset_list);
 
 
         assets = dbHandler.getUserAssets();
         adapter = new CoinAdapter(this, R.layout.coin_view_layout, assets);
-        listView.setAdapter(adapter);
+        //listView.setAdapter(adapter);
 
 
         fab = findViewById(R.id.fab);

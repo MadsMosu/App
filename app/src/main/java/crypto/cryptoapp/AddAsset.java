@@ -29,6 +29,7 @@ public class AddAsset extends AppCompatActivity {
     ListView listView;
     List<Asset> assets;
     ArrayAdapter<Asset> adapter;
+    APIcalls apiCalls;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +40,7 @@ public class AddAsset extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.list_view);
 
 
-        APIcalls apiCalls = new APIcalls(this);
+        apiCalls = new APIcalls(this);
         assets = apiCalls.getAssetList();
 
         adapter = new ArrayAdapter<Asset>(this, android.R.layout.simple_list_item_1, assets);

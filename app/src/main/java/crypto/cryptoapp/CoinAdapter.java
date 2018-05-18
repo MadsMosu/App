@@ -33,8 +33,8 @@ public class CoinAdapter extends ArrayAdapter<Asset>{
         String price = getItem(position).getPrice().toString();
         String change = getItem(position).getChange().toString();
 
-        LayoutInflater infalter = LayoutInflater.from(this.context);
-        convertView = infalter.inflate(this.resource, parent, false);
+        LayoutInflater inflater = LayoutInflater.from(this.context);
+        convertView = inflater.inflate(this.resource, parent, false);
 
         TextView twName = (TextView) convertView.findViewById(R.id.name);
         TextView twPrice = (TextView) convertView.findViewById(R.id.price);
@@ -43,5 +43,7 @@ public class CoinAdapter extends ArrayAdapter<Asset>{
         twName.setText(name + " (" + symbol + ")");
         twPrice.setText(price);
         twChange.setText(change);
+
+        return convertView;
     }
 }

@@ -4,19 +4,32 @@ import android.arch.lifecycle.LiveData;
 import android.content.Context;
 import android.os.AsyncTask;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DBHandler {
     private AssetDAO assetDao;
 
-
     DBHandler(Context context) {
         AppDatabase db = AppDatabase.getInMemoryDatabase(context);
         assetDao = db.assetDao();
+        assetDao.addUserAsset(new Asset("BTC", "Bitcoin"));
+        assetDao.addUserAsset(new Asset("ETH", "Ethereum"));
+        assetDao.addUserAsset(new Asset("NEO", "Neo"));
     }
+
+
 
     List<Asset> getUserAssets() {
         return assetDao.getUserAssets();
+    }
+
+    public List<String> getUserAssetString(){
+        List<String> stringList = new ArrayList<>();
+        for (Asset asset: assetDao.getUserAssets()) {
+            stringList.add(asset.getSymbol());
+        }
+        return stringList;
     }
 
     public void addUserAsset (Asset asset) {
@@ -26,6 +39,8 @@ public class DBHandler {
     public void updateUserAsset (List<Asset> assets) {
         assetDao.updateUserAsset(assets.toArray(new Asset[assets.size()]));
     }
+
+
 
     private static class insertAsyncTask extends AsyncTask<Asset, Void, Void> {
 

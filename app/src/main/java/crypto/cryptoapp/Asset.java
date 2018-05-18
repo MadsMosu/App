@@ -2,6 +2,7 @@ package crypto.cryptoapp;
 
 import android.arch.persistence.room.*;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 @Entity
 public class Asset {
