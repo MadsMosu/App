@@ -96,6 +96,7 @@ public class APIcalls {
                         try {
                             data = response.getJSONObject("RAW");
 
+
                             array = data.names(); // contains all the keys inside RAW
 
                             for(int i = 0; i<array.length();i++){

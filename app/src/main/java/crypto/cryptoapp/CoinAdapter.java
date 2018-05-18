@@ -28,19 +28,20 @@ public class CoinAdapter extends ArrayAdapter<Asset>{
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        String name = getItem(position).getAssetName();
         String symbol = getItem(position).getSymbol();
         String price = getItem(position).getPrice().toString();
         String change = getItem(position).getChange().toString();
 
+        Asset asset = new Asset(symbol, price, change);
+
         LayoutInflater inflater = LayoutInflater.from(this.context);
         convertView = inflater.inflate(this.resource, parent, false);
 
-        TextView twName = (TextView) convertView.findViewById(R.id.name);
+        TextView twSymbol = (TextView) convertView.findViewById(R.id.symbol);
         TextView twPrice = (TextView) convertView.findViewById(R.id.price);
         TextView twChange = (TextView) convertView.findViewById(R.id.change);
 
-        twName.setText(name + " (" + symbol + ")");
+        twSymbol.setText(symbol);
         twPrice.setText(price);
         twChange.setText(change);
 
