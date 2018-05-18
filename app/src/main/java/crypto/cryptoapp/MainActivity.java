@@ -34,8 +34,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         assets = dbHandler.getUserAssets();
-        adapter = new ArrayAdapter<Asset>(this, android.R.layout.simple_list_item_1, assets);
-        //listView.setAdapter(adapter);
+        adapter = new CoinAdapter(this, R.layout.coin_view_layout, assets);
+        listView.setAdapter(adapter);
 
 
         fab = findViewById(R.id.fab);

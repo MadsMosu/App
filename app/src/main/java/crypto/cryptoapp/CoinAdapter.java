@@ -8,8 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Mads on 08-05-2018.
@@ -20,7 +19,7 @@ public class CoinAdapter extends ArrayAdapter<Asset>{
     private int resource;
 
 
-    public CoinAdapter(@NonNull Context context, int resource, ArrayList<Asset> assets) {
+    public CoinAdapter(@NonNull Context context, int resource, List<Asset> assets) {
         super(context, resource, assets);
         this.context = context;
         this.resource = resource;
@@ -31,8 +30,8 @@ public class CoinAdapter extends ArrayAdapter<Asset>{
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         String name = getItem(position).getAssetName();
         String symbol = getItem(position).getSymbol();
-
-        APIcalls apiCalls = new APIcalls(this.context);
+        String price = getItem(position).getPrice().toString();
+        String change = getItem(position).getChange().toString();
 
         LayoutInflater infalter = LayoutInflater.from(this.context);
         convertView = infalter.inflate(this.resource, parent, false);
@@ -42,7 +41,7 @@ public class CoinAdapter extends ArrayAdapter<Asset>{
         TextView twChange = (TextView) convertView.findViewById(R.id.change);
 
         twName.setText(name + " (" + symbol + ")");
-        twPrice.setText();
-        twChange.setText();
+        twPrice.setText(price);
+        twChange.setText(change);
     }
 }
