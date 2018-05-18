@@ -3,7 +3,9 @@ package crypto.cryptoapp;
 import android.arch.lifecycle.LiveData;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -19,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
     DBHandler dbHandler;
     ListView listView;
     ArrayAdapter<Asset> adapter;
+    SwipeRefreshLayout swipeRefreshLayout;
+    Handler handler = new Handler();
 
 
 
@@ -30,9 +34,9 @@ public class MainActivity extends AppCompatActivity {
         dbHandler = new DBHandler(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //listView = (ListView) findViewById(R.id.users_asset_list);
 
 
+        listView = (ListView) findViewById(R.id.coinListView);
         assets = dbHandler.getUserAssets();
         adapter = new CoinAdapter(this, R.layout.coin_view_layout, assets);
         listView.setAdapter(adapter);
@@ -45,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, AddAsset.class));
             }
         });
+
     }
 
 
