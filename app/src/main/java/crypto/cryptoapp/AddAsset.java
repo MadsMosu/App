@@ -51,7 +51,7 @@ public class AddAsset extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> AV, View v, int pos,
                                     long id) {
-                dbHandler.addUserAsset(assets.get((int)AV.getSelectedItemId()));
+                dbHandler.addUserAsset(assets.get(pos));
                 startActivity(new Intent(AddAsset.this, MainActivity.class));
 
 

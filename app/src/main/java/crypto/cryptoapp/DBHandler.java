@@ -33,7 +33,7 @@ public class DBHandler {
     }
 
     public void addUserAsset (Asset asset) {
-        assetDao.addUserAsset(asset);
+        new insertAsyncTask(assetDao).execute(asset);
     }
 
     public void updateUserAsset (Asset asset) {

@@ -24,7 +24,8 @@ public class MainActivity extends AppCompatActivity {
     ListView listView;
     ArrayAdapter<Asset> adapter;
     APIcalls apiCalls;
-
+    SwipeRefreshLayout swipeRefreshLayout;
+    Handler handler = new Handler();
 
 
     @Override
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         assets = dbHandler.getUserAssets();
         Log.d("", assets.toString());
         adapter = new CoinAdapter(this, R.layout.coin_view_layout, assets);
-        //listView.setAdapter(adapter);
+        listView.setAdapter(adapter);
 
 
         fab = findViewById(R.id.fab);
@@ -55,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        /*
+
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
         swipeRefreshLayout.setOnRefreshListener(
                 new SwipeRefreshLayout.OnRefreshListener() {
@@ -100,8 +101,8 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-        */
-    }
+
+    };
 
 
 

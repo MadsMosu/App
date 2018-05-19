@@ -11,13 +11,13 @@ public class Asset {
     @NonNull
     private String symbol;
 
-    @ColumnInfo(name = "asset name")
+    @ColumnInfo(name = "assetMame")
     private String assetName;
 
-    @ColumnInfo(name = "asset price")
+    @ColumnInfo(name = "assetPrice")
     private Double price;
 
-    @ColumnInfo(name = "price change")
+    @ColumnInfo(name = "priceChange")
     private Double change;
 
     @Ignore
