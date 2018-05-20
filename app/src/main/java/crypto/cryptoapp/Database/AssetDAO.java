@@ -21,7 +21,7 @@ public interface AssetDAO {
     void addUserAsset(Asset asset);
 
     @Update
-    void updateUserAsset(Asset asset);
+    void updateUserAsset(Asset... asset);
 
     @Delete
     void delete(Asset asset);

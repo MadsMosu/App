@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
         apiCalls.getCurrentPrice(dbHandler.getUserAssetString(), ofl);
         theAssets = dbHandler.getUserAssets();
+
         listView = findViewById(R.id.coinListView);
         adapter = new CoinAdapter(this, R.layout.coin_view_layout, theAssets);
         listView.setAdapter(adapter);

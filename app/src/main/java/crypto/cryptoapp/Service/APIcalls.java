@@ -89,7 +89,10 @@ public class APIcalls {
         return fullAssetList;
     }
 
-
+    /*
+    **Fetches data for all the assets the user has chosen.
+    **
+     */
     private List<Asset> loadPrices(String url, final OnFinishListener listener) {
         assetList = new ArrayList<>();
         final JsonObjectRequest DataRequest = new JsonObjectRequest(Request.Method.GET, url, null,
@@ -100,8 +103,6 @@ public class APIcalls {
                         JSONArray array;
                         try {
                             data = response.getJSONObject("RAW");
-
-
                             array = data.names(); // contains all the keys inside RAW
 
                             for (int i = 0; i < array.length(); i++) {
@@ -118,11 +119,14 @@ public class APIcalls {
                                             asset.setPrice(Double.parseDouble(obj1.getString("PRICE")));
                                             asset.setChange(Double.parseDouble(obj1.getString
                                                     ("CHANGEPCT24HOUR")));
-                                            dbHandler.updateUserAsset(asset);
+                                            assetList.add(asset);
+
                                         }
                                     }
+
                                 }
                             }
+                            dbHandler.updateUserAsset(assetList);
                             listener.onFinish(assetList);
                         } catch (JSONException e) {
 
