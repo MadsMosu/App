@@ -9,6 +9,7 @@ public class Asset {
 
     @PrimaryKey
     @NonNull
+    @ColumnInfo(name = "asset symbol")
     private String symbol;
 
     @ColumnInfo(name = "asset name")
@@ -35,7 +36,6 @@ public class Asset {
 
         this.symbol = symbol;
         this.change = Double.parseDouble(change);
-        Log.d(change, "thechange");
         this.price = Double.parseDouble(price);
     }
 

@@ -33,9 +33,9 @@ public class CoinAdapter extends ArrayAdapter<Asset> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         DecimalFormat df = new DecimalFormat("#.##");
-        String symbol, sign;
+        String name, sign;
         double price, change;
-        symbol = getItem(position).getSymbol();
+        name = getItem(position).getAssetName();
         if (getItem(position).getPrice() != null & getItem(position).getChange() != null) {
 
             price = (getItem(position).getPrice());
@@ -53,7 +53,7 @@ public class CoinAdapter extends ArrayAdapter<Asset> {
         TextView twChange = (TextView) convertView.findViewById(R.id.change);
 
 
-        twSymbol.setText(symbol);
+        twSymbol.setText(name);
 
         if (!isNegative(change)) {
             sign = "+";

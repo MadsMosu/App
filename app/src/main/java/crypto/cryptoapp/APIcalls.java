@@ -113,10 +113,14 @@ public class APIcalls {
 
                                     String key1 = theArray.getString(j);
                                     JSONObject obj1 = obj.getJSONObject(key1);
-                                    dbHandler.addUserAsset(new Asset(obj1.getString
-                                            ("FROMSYMBOL"), obj1
-                                            .getString("PRICE"), obj1.getString
-                                            ("CHANGEPCT24HOUR")));
+                                    for (Asset asset:dbHandler.getUserAssets()) {
+                                        if (asset.getSymbol().equals(obj1.getString("FROMSYMBOL"))) {
+                                            asset.setPrice(Double.parseDouble(obj1.getString("PRICE")));
+                                            asset.setChange(Double.parseDouble(obj1.getString
+                                                    ("CHANGEPCT24HOUR")));
+                                            dbHandler.updateUserAsset(asset);
+                                        }
+                                    }
                                 }
                             }
                             listener.onFinish(assetList);
