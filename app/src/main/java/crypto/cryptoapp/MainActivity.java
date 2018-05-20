@@ -27,12 +27,14 @@ public class MainActivity extends AppCompatActivity {
     SwipeRefreshLayout swipeRefreshLayout;
     Handler handler = new Handler();
     //Listener for new content
-    OnFinishListener ofl = new OnFinishListener(){
-        @Override public void onFinish(List<Asset> assets ){
+    OnFinishListener ofl = new OnFinishListener() {
+        @Override
+        public void onFinish(List<Asset> assets) {
             theAssets = dbHandler.getUserAssets();
             adapter.clear();
             adapter.addAll(theAssets);
             adapter.notifyDataSetChanged();
+            swipeRefreshLayout.setRefreshing(false);
         }
     };
 
@@ -43,14 +45,13 @@ public class MainActivity extends AppCompatActivity {
         dbHandler = DBHandler.getInstance(this);
         apiCalls = new APIcalls(this);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
 
 
         apiCalls.getCurrentPrice(dbHandler.getUserAssetString(), ofl);
         theAssets = dbHandler.getUserAssets();
-        listView = (ListView) findViewById(R.id.coinListView);
+        listView = findViewById(R.id.coinListView);
         adapter = new CoinAdapter(this, R.layout.coin_view_layout, theAssets);
         listView.setAdapter(adapter);
 
@@ -63,12 +64,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
+        swipeRefreshLayout = findViewById(R.id.swipe_container);
         swipeRefreshLayout.setOnRefreshListener(
                 new SwipeRefreshLayout.OnRefreshListener() {
 
                     @Override
-                    public void onRefresh(){
+                    public void onRefresh() {
                         handler.post(refreshing);
                     }
                 });
@@ -83,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
                 boolean enable = false;
 
-                if(listView != null && listView.getChildCount() > 0){
+                if (listView != null && listView.getChildCount() > 0) {
                     boolean firstItemVisible = listView.getFirstVisiblePosition() == 0;
                     boolean topOfFirstItemVisible = listView.getChildAt(0).getTop() == 0;
                     enable = firstItemVisible && topOfFirstItemVisible;
@@ -93,19 +94,18 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private final Runnable refreshing = new Runnable(){
+    private final Runnable refreshing = new Runnable() {
         @Override
         public void run() {
             try {
-                if(swipeRefreshLayout.isRefreshing()){
+                if (swipeRefreshLayout.isRefreshing()) {
                     apiCalls.getCurrentPrice(dbHandler.getUserAssetString(), ofl);
-                    swipeRefreshLayout.setRefreshing(false);
 
                 } else {
 
                     swipeRefreshLayout.setRefreshing(false);
                 }
-            } catch(Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }

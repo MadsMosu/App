@@ -32,8 +32,9 @@ public class AddAsset extends AppCompatActivity {
     APIcalls apiCalls;
 
 
-    OnFinishListener ofl = new OnFinishListener(){
-        @Override public void onFinish(List<Asset> assets){
+    OnFinishListener ofl = new OnFinishListener() {
+        @Override
+        public void onFinish(List<Asset> assets) {
             allAssets = assets;
             adapter.clear();
             adapter.addAll(allAssets);
@@ -53,7 +54,7 @@ public class AddAsset extends AppCompatActivity {
         apiCalls = new APIcalls(this);
         allAssets = apiCalls.getAssetList(ofl);
 
-        adapter = new ArrayAdapter<Asset>(this, android.R.layout.simple_list_item_1, allAssets);
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, allAssets);
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -63,7 +64,6 @@ public class AddAsset extends AppCompatActivity {
                                     long id) {
                 dbHandler.addUserAsset(allAssets.get(pos));
                 startActivity(new Intent(AddAsset.this, MainActivity.class));
-
 
 
             }
@@ -80,17 +80,15 @@ public class AddAsset extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String newText) {
                 adapter.getFilter().filter(newText);
-
                 return false;
             }
         });
     }
 
-    protected void onStart(){
+    protected void onStart() {
         super.onStart();
         allAssets = apiCalls.getAssetList(ofl);
     }
-
 
 
 }

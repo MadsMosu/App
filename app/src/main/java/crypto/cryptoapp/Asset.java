@@ -74,6 +74,6 @@ public class Asset {
 
     @Override
     public String toString() {
-        return getAssetName() + " (" + getSymbol() + ")" ;
+        return getAssetName() + " (" + getSymbol() + ")";
     }
 }

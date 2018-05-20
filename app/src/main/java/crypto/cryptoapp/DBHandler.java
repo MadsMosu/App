@@ -30,23 +30,22 @@ public class DBHandler {
         return assetDao.getUserAssets();
     }
 
-    public List<String> getUserAssetString(){
+    public List<String> getUserAssetString() {
         List<String> stringList = new ArrayList<>();
-        for (Asset asset: assetDao.getUserAssets()) {
+        for (Asset asset : assetDao.getUserAssets()) {
             stringList.add(asset.getSymbol());
         }
         return stringList;
     }
 
-    public void addUserAsset (Asset asset) {
+    public void addUserAsset(Asset asset) {
         new insertAsyncTask(assetDao).execute(asset);
     }
 
-    public void updateUserAsset (Asset asset) {
-       // assetDao.updateUserAsset(assets.toArray(new Asset[assets.size()]));
+    public void updateUserAsset(Asset asset) {
+        // assetDao.updateUserAsset(assets.toArray(new Asset[assets.size()]));
         new updateAsyncTask(assetDao).execute(asset);
     }
-
 
 
     private static class insertAsyncTask extends AsyncTask<Asset, Void, Void> {

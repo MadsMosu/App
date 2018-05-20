@@ -12,10 +12,11 @@ import android.content.Context;
 @Database(entities = {Asset.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase INSTANCE;
+
     public abstract AssetDAO assetDao();
 
     public static AppDatabase getInMemoryDatabase(Context context) {
-        if(INSTANCE == null) {
+        if (INSTANCE == null) {
             INSTANCE = Room.inMemoryDatabaseBuilder(context.getApplicationContext(), AppDatabase.class).allowMainThreadQueries().build();
 
         }

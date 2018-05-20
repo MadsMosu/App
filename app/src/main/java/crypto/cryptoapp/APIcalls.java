@@ -18,12 +18,11 @@ import org.json.*;
 
 public class APIcalls {
 
-    private static APIcalls apicalls;
     private String URL_request;
     private List<Asset> assetList, fullAssetList;
     private RequestQueue requestQueue;
     private DBHandler dbHandler;
-    Context context;
+    private Context context;
 
     public APIcalls(Context context) {
         this.context = context;
@@ -33,19 +32,19 @@ public class APIcalls {
     }
 
     // api request to get a list of all available assets.
-    public List<Asset> getAssetList(OnFinishListener listener){
+    public List<Asset> getAssetList(OnFinishListener listener) {
 
         URL_request = "https://min-api.cryptocompare.com/data/all/coinlist";
         return loadURL(URL_request, listener);
 
     }
 
-    public List<Asset> getCurrentPrice(List<String> assetSymbols, OnFinishListener listener){
+    public List<Asset> getCurrentPrice(List<String> assetSymbols, OnFinishListener listener) {
         StringBuilder sb = new StringBuilder();
         sb.append("https://min-api.cryptocompare.com/data/pricemultifull?fsyms=");
-        for (String symbol:assetSymbols) {
+        for (String symbol : assetSymbols) {
             sb.append(symbol);
-            if(!symbol.equals(assetSymbols.get(assetSymbols.size()-1))){
+            if (!symbol.equals(assetSymbols.get(assetSymbols.size() - 1))) {
                 sb.append(",");
             }
         }
@@ -53,7 +52,6 @@ public class APIcalls {
         URL_request = sb.toString();
         return loadPrices(URL_request, listener);
     }
-
 
 
     private List<Asset> loadURL(String url, final OnFinishListener listener) {
@@ -65,19 +63,18 @@ public class APIcalls {
                         JSONObject data;
                         JSONArray array;
                         try {
-                                    data = response.getJSONObject("Data");
-                                    array = data.names(); // contains all the keys inside Data
+                            data = response.getJSONObject("Data");
+                            array = data.names(); // contains all the keys inside Data
 
-                                    for (int i = 0; i < array.length(); i++) {
-                                        String key = array.getString(i);
-                                        JSONObject obj = data.getJSONObject(key);
-                                        fullAssetList.add(new Asset(obj.getString("Symbol"), obj
-                                                .getString("CoinName")));
+                            for (int i = 0; i < array.length(); i++) {
+                                String key = array.getString(i);
+                                JSONObject obj = data.getJSONObject(key);
+                                fullAssetList.add(new Asset(obj.getString("Symbol"), obj
+                                        .getString("CoinName")));
 
-                                    }
-                                    listener.onFinish(fullAssetList);
-                           }
-                        catch (JSONException e) {
+                            }
+                            listener.onFinish(fullAssetList);
+                        } catch (JSONException e) {
 
                             Log.d("shit", "I got an error", e);
                         }
@@ -107,7 +104,7 @@ public class APIcalls {
 
                             array = data.names(); // contains all the keys inside RAW
 
-                            for(int i = 0; i<array.length();i++){
+                            for (int i = 0; i < array.length(); i++) {
                                 String key = array.getString(i);
                                 JSONObject obj = data.getJSONObject(key);
                                 JSONArray theArray = obj.names();
@@ -120,10 +117,10 @@ public class APIcalls {
                                             ("FROMSYMBOL"), obj1
                                             .getString("PRICE"), obj1.getString
                                             ("CHANGEPCT24HOUR")));
-                                    }}
+                                }
+                            }
                             listener.onFinish(assetList);
-                        }
-                        catch (JSONException e) {
+                        } catch (JSONException e) {
 
                             Log.d("shit", "I got an error", e);
                         }

@@ -16,7 +16,7 @@ import java.util.List;
  * Created by Mads on 08-05-2018.
  */
 
-public class CoinAdapter extends ArrayAdapter<Asset>{
+public class CoinAdapter extends ArrayAdapter<Asset> {
     private Context context;
     private int resource;
     private List<Asset> assets;
@@ -36,12 +36,14 @@ public class CoinAdapter extends ArrayAdapter<Asset>{
         String symbol, sign;
         double price, change;
         symbol = getItem(position).getSymbol();
-        if (getItem(position).getPrice() != null & getItem(position).getChange() != null){
+        if (getItem(position).getPrice() != null & getItem(position).getChange() != null) {
 
-        price = (getItem(position).getPrice());
-        change = (getItem(position).getChange());
-    }
-    else{price = 0; change = 0; }
+            price = (getItem(position).getPrice());
+            change = (getItem(position).getChange());
+        } else {
+            price = 0;
+            change = 0;
+        }
 
         LayoutInflater inflater = LayoutInflater.from(this.context);
         convertView = inflater.inflate(this.resource, parent, false);
@@ -53,14 +55,14 @@ public class CoinAdapter extends ArrayAdapter<Asset>{
 
         twSymbol.setText(symbol);
 
-            if(isNegative(change)){
-                sign = "-";
-            } else {
-                sign = "+";
-            }
+        if (!isNegative(change)) {
+            sign = "+";
+        } else {
+            sign = "";
+        }
 
-            twPrice.setText("$" + df.format(price));
-            twChange.setText(sign + df.format(change) + "%");
+        twPrice.setText("$" + df.format(price));
+        twChange.setText(sign + df.format(change) + "%");
 
 
         return convertView;
