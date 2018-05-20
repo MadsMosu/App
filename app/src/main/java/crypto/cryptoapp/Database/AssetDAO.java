@@ -1,9 +1,11 @@
-package crypto.cryptoapp;
+package crypto.cryptoapp.Database;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.*;
 
 import java.util.List;
+
+import crypto.cryptoapp.Asset;
 
 /**
  * Created by Mads on 04-05-2018.

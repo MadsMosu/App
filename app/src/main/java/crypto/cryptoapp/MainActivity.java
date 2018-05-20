@@ -1,6 +1,5 @@
 package crypto.cryptoapp;
 
-import android.arch.lifecycle.LiveData;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -8,13 +7,15 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
 import java.util.List;
+
+import crypto.cryptoapp.Database.DBHandler;
+import crypto.cryptoapp.Service.APIcalls;
+import crypto.cryptoapp.Service.OnFinishListener;
 
 public class MainActivity extends AppCompatActivity {
 

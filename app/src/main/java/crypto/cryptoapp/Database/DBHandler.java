@@ -1,11 +1,12 @@
-package crypto.cryptoapp;
+package crypto.cryptoapp.Database;
 
-import android.arch.lifecycle.LiveData;
 import android.content.Context;
 import android.os.AsyncTask;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import crypto.cryptoapp.Asset;
 
 public class DBHandler {
     private AssetDAO assetDao;
@@ -26,7 +27,7 @@ public class DBHandler {
         return dbHandler;
     }
 
-    List<Asset> getUserAssets() {
+    public List<Asset> getUserAssets() {
         return assetDao.getUserAssets();
     }
 

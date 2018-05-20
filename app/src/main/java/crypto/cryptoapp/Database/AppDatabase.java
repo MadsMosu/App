@@ -1,4 +1,4 @@
-package crypto.cryptoapp;
+package crypto.cryptoapp.Database;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
@@ -6,6 +6,8 @@ import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
+
+import crypto.cryptoapp.Asset;
 
 /**
  * Created by Mads on 04-05-2018.

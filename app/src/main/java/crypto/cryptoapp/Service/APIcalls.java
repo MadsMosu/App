@@ -1,20 +1,20 @@
-package crypto.cryptoapp;
+package crypto.cryptoapp.Service;
 
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.android.volley.*;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.*;
+
+import crypto.cryptoapp.Asset;
+import crypto.cryptoapp.Database.DBHandler;
 
 public class APIcalls {
 
