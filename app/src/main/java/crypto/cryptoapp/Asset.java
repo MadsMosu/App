@@ -39,6 +39,7 @@ public class Asset {
         this.price = Double.parseDouble(price);
     }
 
+    @NonNull
     public String getSymbol() {
         return symbol;
     }

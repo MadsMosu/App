@@ -48,9 +48,9 @@ public class CoinAdapter extends ArrayAdapter<Asset> {
         LayoutInflater inflater = LayoutInflater.from(this.context);
         convertView = inflater.inflate(this.resource, parent, false);
 
-        TextView twSymbol = (TextView) convertView.findViewById(R.id.symbol);
-        TextView twPrice = (TextView) convertView.findViewById(R.id.price);
-        TextView twChange = (TextView) convertView.findViewById(R.id.change);
+        TextView twSymbol = convertView.findViewById(R.id.symbol);
+        TextView twPrice = convertView.findViewById(R.id.price);
+        TextView twChange = convertView.findViewById(R.id.change);
 
 
         twSymbol.setText(name);

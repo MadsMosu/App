@@ -47,8 +47,8 @@ public class AddAsset extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_asset);
         dbHandler = DBHandler.getInstance(this);
-        searchView = (SearchView) findViewById(R.id.search_coin);
-        listView = (ListView) findViewById(R.id.list_view);
+        searchView = findViewById(R.id.search_coin);
+        listView = findViewById(R.id.list_view);
 
 
         apiCalls = new APIcalls(this);
