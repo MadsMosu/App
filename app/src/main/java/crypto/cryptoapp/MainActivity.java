@@ -19,32 +19,39 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     FloatingActionButton fab;
-    List<Asset> assets, updateAssets;
+    List<Asset> theAssets;
     DBHandler dbHandler;
     ListView listView;
     ArrayAdapter<Asset> adapter;
     APIcalls apiCalls;
     SwipeRefreshLayout swipeRefreshLayout;
     Handler handler = new Handler();
-
+    //Listener for new content
+    OnFinishListener ofl = new OnFinishListener(){
+        @Override public void onFinish(List<Asset> assets ){
+            theAssets = dbHandler.getUserAssets();
+            adapter.clear();
+            adapter.addAll(theAssets);
+            adapter.notifyDataSetChanged();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        dbHandler = new DBHandler(this);
-        apiCalls = new APIcalls(this, dbHandler);
+        dbHandler = DBHandler.getInstance(this);
+        apiCalls = new APIcalls(this);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        updateAssets = apiCalls.getCurrentPrice(dbHandler.getUserAssetString());
 
 
+        apiCalls.getCurrentPrice(dbHandler.getUserAssetString(), ofl);
+        theAssets = dbHandler.getUserAssets();
         listView = (ListView) findViewById(R.id.coinListView);
-        assets = dbHandler.getUserAssets();
-        Log.d("", assets.toString());
-        adapter = new CoinAdapter(this, R.layout.coin_view_layout, assets);
+        adapter = new CoinAdapter(this, R.layout.coin_view_layout, theAssets);
         listView.setAdapter(adapter);
 
 
@@ -55,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, AddAsset.class));
             }
         });
-
 
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
         swipeRefreshLayout.setOnRefreshListener(
@@ -92,10 +98,12 @@ public class MainActivity extends AppCompatActivity {
         public void run() {
             try {
                 if(swipeRefreshLayout.isRefreshing()){
-                    //fetch new data here
-                } else {
+                    apiCalls.getCurrentPrice(dbHandler.getUserAssetString(), ofl);
                     swipeRefreshLayout.setRefreshing(false);
-                    //update list here
+
+                } else {
+
+                    swipeRefreshLayout.setRefreshing(false);
                 }
             } catch(Exception e) {
                 e.printStackTrace();
@@ -104,6 +112,11 @@ public class MainActivity extends AppCompatActivity {
 
     };
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        apiCalls.getCurrentPrice(dbHandler.getUserAssetString(), ofl);
+    }
 
 
 }

@@ -11,13 +11,13 @@ public class Asset {
     @NonNull
     private String symbol;
 
-    @ColumnInfo(name = "assetMame")
+    @ColumnInfo(name = "asset name")
     private String assetName;
 
-    @ColumnInfo(name = "assetPrice")
+    @ColumnInfo(name = "asset price")
     private Double price;
 
-    @ColumnInfo(name = "priceChange")
+    @ColumnInfo(name = "price change")
     private Double change;
 
     @Ignore
@@ -25,16 +25,17 @@ public class Asset {
 
     }
 
-    public Asset(String symbol, String assetName) {
+    public Asset(@NonNull String symbol, String assetName) {
         this.symbol = symbol;
         this.assetName = assetName;
     }
 
-    @Ignore
-    public Asset(String symbol, String price, String change) {
+
+    public Asset(@NonNull String symbol, String price, String change) {
 
         this.symbol = symbol;
         this.change = Double.parseDouble(change);
+        Log.d(change, "thechange");
         this.price = Double.parseDouble(price);
     }
 
@@ -42,7 +43,7 @@ public class Asset {
         return symbol;
     }
 
-    public void setSymbol(String symbol) {
+    public void setSymbol(@NonNull String symbol) {
         this.symbol = symbol;
     }
 

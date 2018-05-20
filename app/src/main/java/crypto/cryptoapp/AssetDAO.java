@@ -12,7 +12,7 @@ import java.util.List;
 @Dao
 public interface AssetDAO {
 
-    @Query("SELECT * FROM asset")
+    @Query("SELECT * FROM Asset")
     List<Asset> getUserAssets();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

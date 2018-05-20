@@ -27,23 +27,33 @@ public class AddAsset extends AppCompatActivity {
     DBHandler dbHandler;
     SearchView searchView;
     ListView listView;
-    List<Asset> assets;
+    List<Asset> allAssets;
     ArrayAdapter<Asset> adapter;
     APIcalls apiCalls;
+
+
+    OnFinishListener ofl = new OnFinishListener(){
+        @Override public void onFinish(List<Asset> assets){
+            allAssets = assets;
+            adapter.clear();
+            adapter.addAll(allAssets);
+            adapter.notifyDataSetChanged();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_asset);
-        dbHandler = new DBHandler(this);
+        dbHandler = DBHandler.getInstance(this);
         searchView = (SearchView) findViewById(R.id.search_coin);
         listView = (ListView) findViewById(R.id.list_view);
 
 
-        apiCalls = new APIcalls(this, dbHandler);
-        assets = apiCalls.getAssetList();
+        apiCalls = new APIcalls(this);
+        allAssets = apiCalls.getAssetList(ofl);
 
-        adapter = new ArrayAdapter<Asset>(this, android.R.layout.simple_list_item_1, assets);
+        adapter = new ArrayAdapter<Asset>(this, android.R.layout.simple_list_item_1, allAssets);
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -51,7 +61,7 @@ public class AddAsset extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> AV, View v, int pos,
                                     long id) {
-                dbHandler.addUserAsset(assets.get(pos));
+                dbHandler.addUserAsset(allAssets.get(pos));
                 startActivity(new Intent(AddAsset.this, MainActivity.class));
 
 
@@ -75,5 +85,12 @@ public class AddAsset extends AppCompatActivity {
             }
         });
     }
+
+    protected void onStart(){
+        super.onStart();
+        allAssets = apiCalls.getAssetList(ofl);
+    }
+
+
 
 }

@@ -9,8 +9,9 @@ import java.util.List;
 
 public class DBHandler {
     private AssetDAO assetDao;
+    private static DBHandler dbHandler;
 
-    DBHandler(Context context) {
+    private DBHandler(Context context) {
         AppDatabase db = AppDatabase.getInMemoryDatabase(context);
         assetDao = db.assetDao();
         assetDao.addUserAsset(new Asset("BTC", "Bitcoin"));
@@ -18,7 +19,12 @@ public class DBHandler {
         assetDao.addUserAsset(new Asset("NEO", "Neo"));
     }
 
-
+    public static synchronized DBHandler getInstance(Context context) {
+        if (dbHandler == null) {
+            dbHandler = new DBHandler(context.getApplicationContext());
+        }
+        return dbHandler;
+    }
 
     List<Asset> getUserAssets() {
         return assetDao.getUserAssets();
@@ -38,7 +44,7 @@ public class DBHandler {
 
     public void updateUserAsset (Asset asset) {
        // assetDao.updateUserAsset(assets.toArray(new Asset[assets.size()]));
-        assetDao.updateUserAsset(asset);
+        new updateAsyncTask(assetDao).execute(asset);
     }
 
 
