@@ -113,7 +113,7 @@ public class APIcalls {
 
                                     String key1 = theArray.getString(j);
                                     JSONObject obj1 = obj.getJSONObject(key1);
-                                    for (Asset asset:dbHandler.getUserAssets()) {
+                                    for (Asset asset : dbHandler.getUserAssets()) {
                                         if (asset.getSymbol().equals(obj1.getString("FROMSYMBOL"))) {
                                             asset.setPrice(Double.parseDouble(obj1.getString("PRICE")));
                                             asset.setChange(Double.parseDouble(obj1.getString
